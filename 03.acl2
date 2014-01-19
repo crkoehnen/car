@@ -30,6 +30,46 @@
 
 ;; 3.12
 (defun subset (x y)
+  (cond ((endp x) t)
+        ((mem (car x) y) (subset (cdr x) y))
+        (t nil)))
+
+;; 3.13
+(defun dedup (in out)
+  (cond ((and (atom out) (not (null out))) '())
+        ((endp in) out)
+        ((mem (car in) out) (dedup (cdr in) out))
+        (t (dedup (cdr in) (cons (car in) out)))))
+
+(defun un (x y)
+  (dedup (append x y) '()))
+
+;; 3.14
+(defun int (x y)
   (cond ((endp x) '())
-        ((mem (car x) y) (cons (car x) (subset (cdr x) y)))
-        (t (subset (cdr x) y))))
+        ((mem (car x) y) (cons (car x) (int (cdr x) y)))
+        (t (int (cdr x) y))))
+
+;; 3.15
+(defun diff (x y)
+  (cond ((endp x) '())
+        ((mem (car x) y) (diff (cdr x) y))
+        (t (cons (car x) (diff (cdr x) y)))))
+
+;; 3.16
+(defun rev (x)
+  (if (endp x)
+      '()
+    (append (rev (cdr x)) (list (car x)))))
+
+;; 3.17
+(defun insert (i l)
+  (cond ((endp l) (list i))
+        ((<= i (car l)) (cons i l))
+        (t (cons (car l) (insert i (cdr l))))))
+
+(defun isort (l)
+  (if (endp l)
+      '()
+    (let ((tail (isort (cdr l))))
+      (insert (car l) tail))))
