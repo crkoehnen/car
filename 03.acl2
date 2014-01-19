@@ -1,0 +1,35 @@
+
+;; 3.10
+(defun fib (n)
+  (cond
+   ((zp n) 1)
+   ((= n 1) 1)
+   (t
+    (+ (fib (- n 1))
+       (fib (- n 2))))))
+
+;; 3.11
+(defun pascal (i j)
+  (cond ((not (and (integerp i) (integerp j))) 0)
+        ((= i j) 1)
+        ((< i j) 0)
+        ((= j 0) 1)
+        ((< i 0) 0)
+        ((< j 0) 0)
+        (t (+ (pascal (- i 1) (- j 1))
+              (pascal (- i 1) j)))))
+
+
+
+(defun mem (e x)
+  (if (endp x)
+      nil
+    (if (equal e (car x))
+        t
+      (mem e (cdr x)))))
+
+;; 3.12
+(defun subset (x y)
+  (cond ((endp x) '())
+        ((mem (car x) y) (cons (car x) (subset (cdr x) y)))
+        (t (subset (cdr x) y))))

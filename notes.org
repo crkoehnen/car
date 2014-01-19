@@ -1,0 +1,11 @@
+* chapter 3
+** :redef
+** guard checking
+*** (set-guard-checking :none)
+*** (set-guard-checking :all)
+*** :doc set-guard-checking
+*** :DOC GUARD-EVALUATION-TABLE
+** trace
+*** :doc trace
+*** (trace$ pascal)
+*** (untrace$ pascal)

@@ -1,0 +1,14 @@
+
+(defun make-point (x y)
+  (list x y))
+
+(defun point-x (pair)
+  (car pair))
+
+(defun point-y (pair)
+  (cadr pair))
+
+(defun foo (s)
+  (if (endp s)
+      0
+    (+ 1 (foo (cdr s)))))
