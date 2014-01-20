@@ -136,3 +136,16 @@
                (replace-subtree (cdr p) new (cdr x))))
         (t nil)))
 
+
+;; 3.23
+
+(defun deep-tip (x)
+  (if (atom x)
+      (mv x 0)
+    (mv-let (lft-val lft-depth)
+        (deep-tip (car x))
+      (mv-let (rt-val rt-depth)
+          (deep-tip (cdr x))
+        (if (> lft-depth rt-depth)
+            (mv lft-val (+ lft-depth 1))
+          (mv rt-val (+ rt-depth 1)))))))
