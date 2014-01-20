@@ -149,3 +149,12 @@
         (if (> lft-depth rt-depth)
             (mv lft-val (+ lft-depth 1))
           (mv rt-val (+ rt-depth 1)))))))
+
+
+(defun fact (n)
+  (declare (xargs :guard (and (integerp n) (<= 0 n))
+                  :measure (acl2-count n)))
+  (if (zp n)
+      1
+    (* n (fact (- n 1)))))
+

@@ -9,3 +9,12 @@
 *** :doc trace
 *** (trace$ pascal)
 *** (untrace$ pascal)
+** declarations
+*** (declare (ignore v1 ... vn))
+to indicate variables are unused in body
+*** (declare (xargs :guard g))
+to declare that the gard for a defined function or macro is the
+expression g
+*** (declare (xargs :measure m)
+to declare the "measure" to be used to prove termination
+
