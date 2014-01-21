@@ -1,0 +1,18 @@
+
+;; 4.1
+
+(defun from-end (n lst)
+  (nth n (reverse lst)))
+
+;; 4.2
+
+(defun update-alist (key val a)
+  (acons key val (delete-assoc key a :test 'eql)))
+
+;; 4.3
+
+(defun next-k (k)
+  (if (oddp k)
+      (+ (* 3 k) 1)
+    (/ k 2)))
+
