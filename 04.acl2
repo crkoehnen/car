@@ -16,3 +16,45 @@
       (+ (* 3 k) 1)
     (/ k 2)))
 
+;; 4.4
+;; requires mem from 3.11
+
+(defun no-dupls-p (l)
+  (cond ((endp l) t)
+        ((mem (car l) (cdr l)) nil)
+        (t (no-dupls-p (cdr l)))))
+
+;; 4.5
+
+(defun get-keys (alist)
+  (if (endp alist)
+      '()
+    (cons (caar alist)
+          (get-keys (cdr alist)))))
+
+;; 4.6
+
+(defun survey (l alist)
+  (if (endp l)
+      alist
+    (let ((target (car l)))
+      (let ((survey-says (assoc target alist)))
+        (if survey-says
+            (survey (cdr l) (update-alist target (+ (cdr survey-says) 1) alist))
+          (survey (cdr l) (update-alist target 1 alist)))))))
+
+
+(defun contained-by-p (x y)
+  (cond ((endp x) t)
+        ((not (equal (assoc (caar x) x)
+                     (assoc (caar x) y))) nil)
+        (t (contained-by-p (cdr x) y))))
+
+
+(defun perm (x y)
+  (let ((x-survey (survey x '()))
+        (y-survey (survey y '())))
+    (and (contained-by-p x-survey y-survey)
+         (contained-by-p y-survey x-survey))))
+
+
